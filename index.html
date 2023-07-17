@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback Sentiment Analysis </title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px;
+      background-color: #111;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      color: #e50914;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 36px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      resize: vertical;
+      font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 18px;
+    }
+    button:hover {
+      background-color: #b2070f;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 20px;
+    }
+    .result.positive {
+      background-color: #006400;
+    }
+    .result.negative {
+      background-color: #8b0000;
+    }
+    .image-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .image-container img {
+      max-width: 100%;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> Feedback Sentiment Analysis</h1>
+    <form id="feedbackForm">
+      <div class="form-group">
+        <label for="feedback">Enter your feedback:</label>
+        <textarea id="feedback" rows="5" placeholder="Type your feedback here..."></textarea>
+      </div>
+      <button type="submit">Analyze</button>
+    </form>
+    <div id="resultContainer" class="result"></div>
+    
+  </div>
+
+  <script>
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var feedback = document.getElementById("feedback").value;
+      analyzeSentiment(feedback);
+    });
+
+    function analyzeSentiment(feedback) {
+      // Make an API call or perform necessary Python logic to analyze the sentiment
+      // Update the resultContainer with the appropriate class based on the sentiment result
+      var resultContainer = document.getElementById("resultContainer");
+      var resultText = document.createElement("p");
+
+      // Example code to toggle between positive and negative sentiment
+      if (feedback.includes("excellent") || feedback.includes("good")) {
+        resultText.innerText = "Positive opinion";
+        resultContainer.classList.add("positive");
+        resultContainer.classList.remove("negative");
+      } else {
+        resultText.innerText = "Negative opinion";
+        resultContainer.classList.add("negative");
+        resultContainer.classList.remove("positive");
+      }
+
+      // Clear previous results and display the new result
+      resultContainer.innerHTML = "";
+      resultContainer.appendChild(resultText);
+    }
+  </script>
+</body>
+</html>
